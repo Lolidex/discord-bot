@@ -1,4 +1,6 @@
 ﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using Kẍaa.Modules;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -10,6 +12,7 @@ namespace Kẍaa.Core
             => new Program().RunAsync().Wait();
 
         private DiscordClient _client;
+        private CommandsNextModule _cnext;
 
         public Program()
         {
@@ -22,6 +25,17 @@ namespace Kẍaa.Core
                 TokenType = TokenType.Bot,
                 UseInternalLogHandler = true
             });
+
+            _cnext = _client.UseCommandsNext(new CommandsNextConfiguration()
+            {
+                CaseSensitive = false,
+                EnableDefaultHelp = false,
+                EnableDms = true,
+                EnableMentionPrefix = true,
+                StringPrefix = "k.",
+                IgnoreExtraArguments = true
+            });
+            _cnext.RegisterCommands<Search>();
         }
 
         public async Task RunAsync()
