@@ -43,14 +43,14 @@ namespace Kẍaa.Modules
                     Color = DiscordColor.Green
                 };
                 if (image.HasValue)
-                    embed.ImageUrl = image.Value.fileUrl.AbsolutePath;
+                    embed.ImageUrl = image.Value.fileUrl.AbsoluteUri;
                 if (result.eyesColor != null)
                     embed.AddField("Eyes Color", result.eyesColor);
                 if (result.hairColor != null)
                     embed.AddField("Hair Color", result.hairColor);
                 if (result.source != null)
                     embed.AddField("Source", result.source);
-                embed.WithFooter("Request get in " + res.TotalSeconds + " seconds.");
+                embed.WithFooter("Request get in " + res.TotalSeconds.ToString("00") + " seconds.");
                 await ctx.RespondAsync("", false, embed.Build());
             }
         }
